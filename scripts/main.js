@@ -10,6 +10,8 @@ const guessField = document.querySelector('.guessField');
 let guessCount = 1;
 let resetButton;
 
+guessField.focus();
+
 
 function checkGuess() {
     let userGuess = Number(guessField.value);
@@ -42,6 +44,12 @@ function checkGuess() {
 }
 
 guessSubmit.addEventListener('click', checkGuess);
+// "keyup" is causing unwanted submissions when enter(13) is pressed with focus on submit and reset buttons
+guessField.addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) {
+        checkGuess();
+    }
+});
 
 
 function setGameOver() {
@@ -70,5 +78,5 @@ function resetGame() {
 
     lastResult.style.backgroundColor = 'white';
 
-    randomNumber = Math.floor(Math.random() * 100) = 1;
+    randomNumber = Math.floor(Math.random() * 100) + 1;
 }
